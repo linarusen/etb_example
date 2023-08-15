@@ -10,12 +10,13 @@ builder.Services.AddSwaggerGen();
 #region Ayarlar
 
 //DB-Context Tanimlamasi: (db klasoru)
-//MsSql ve diger dbleri kullanmak icin opt.Use... seklinde guncellenebilir, simdilik gecici tutuluyor veriler. uygulama kapanip acilinca silinir
+//MsSql ve diğer dbleri kullanmak icin opt.Use... şeklinde güncellenebilir, 
+// Şimdilik geçici tutuluyor veriler. uygulama kapanıp açılınca silinir.
 if (!string.IsNullOrEmpty(builder.Configuration.GetConnectionString("DefaultConnection")))
     builder.Services.AddDbContext<customer.db.CustomerContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 else builder.Services.AddDbContext<customer.db.CustomerContext>(opt => opt.UseInMemoryDatabase(databaseName: "db"));
 
-// ui dan istek gonerirken farkli domainde (urlde) oldugu icin hata veriyordu, izin vermek icin eklendi (cors izni)
+//Ui dan istek gönderirken farkli domainde (urlde) olduğu için hata veriyordu, izin vermek için eklendi (Cors izni)
 builder.Services.AddCors(p => p.AddDefaultPolicy(builder => { builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader(); }));
 
 #endregion

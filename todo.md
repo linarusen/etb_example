@@ -1,0 +1,4 @@
+- Loglama
+- Role kontrol
+- DTO - Record
+- Login
